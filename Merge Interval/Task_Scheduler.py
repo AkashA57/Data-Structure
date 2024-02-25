@@ -15,6 +15,7 @@ tasks consists of uppercase English letters.
 
 from collections import Counter
 
+#Time complexity O(N). Sorting is O(1) since there are 26 items. Space Complexity O(1)
 def least_time(tasks, n):
     #Counts frequency of task(Counter is a child class of dictionary)
     frequencies = Counter(tasks)
