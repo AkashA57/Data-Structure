@@ -22,20 +22,25 @@ from heapq import *
 
 def maximum_capital(c, k, capitals, profits):
 
-  # Replace this placeholder return statement with your code
+  # Creating min heap and max heap to store capital and profits respectively.
   cap_heap = []
   prof_heap = []
   result = c
+  # Storing capital with respective indexes(0-based)
   for i in range(len(capitals)):
     heappush(cap_heap, (capitals[i], i))
 
+  #Looping until k number of projects are selected.
   while k>0:
+    # We check if the minimum capital is less than or equal to the current available capital(result). 
+    # If yes, we add the corresponding profit to the max heap(prof_heap) 
     while cap_heap and cap_heap[0][0]<=result:
       min_cap, index = heappop(cap_heap)
       profit = profits[index]
       heappush(prof_heap, -profit)
     if not prof_heap:
       break
+    # Choosing the project that yields the maximum profit till now and adding it to the current available capital(result). 
     result += -heappop(prof_heap)
     k -= 1
   return result
