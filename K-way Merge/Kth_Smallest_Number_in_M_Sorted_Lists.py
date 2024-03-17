@@ -13,6 +13,8 @@ Constraints:
 
 from heapq import *
 
+# Time complexity: O((m+k)logm)
+# Space complexity: O(m)
 def k_smallest_number(lists, k):
 
     # Storing the first element from all the sorted list in the array to a min heap
