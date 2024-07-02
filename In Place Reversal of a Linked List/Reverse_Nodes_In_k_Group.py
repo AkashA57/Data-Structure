@@ -7,41 +7,75 @@ Note: Use only O(1) extra memory space.
 """
 from linked_list import LinkedList
 from linked_list_node import LinkedListNode
+from linked_list_reversal import reverse_linked_list
+
+#My solution
+# def reverse_k_groups(head, k):
+  
+#     # Replace this placeholder return statement with your code
+#     length = 0
+#     traverse = head
+#     result = None
+#     while traverse:
+#         length += 1
+#         if length==k:
+#             result = traverse
+#         traverse = traverse.next
+
+#     groups = length//k
+
+#     prev_gr_end = None
+#     curr = head
+#     for i in range(groups):
+#         prev = None
+#         curr_gr_end = curr
+#         for j in range(k):
+#             nxt = curr.next
+#             curr.next = prev
+#             prev = curr
+#             curr = nxt
+#         if prev_gr_end:
+#             prev_gr_end.next = prev
+#         prev_gr_end = curr_gr_end
+#         curr_gr_end.next = curr
+
+#     return result
+
+# linkList = LinkedList()
+# linkList.create_linked_list([3, 4, 5, 6, 2, 8, 7, 7])
+  
+# linkList.head = reverse_k_groups(linkList.head, 3)
+
+# print(linkList.__str__())
+
 
 def reverse_k_groups(head, k):
-  
-    # Replace this placeholder return statement with your code
-    length = 0
-    traverse = head
-    result = None
-    while traverse:
-        length += 1
-        if length==k:
-            result = traverse
-        traverse = traverse.next
 
-    groups = length//k
+    dummy = LinkedListNode(0)
+    dummy.next = head
+    ptr = dummy
+ 
+    # Looping until the end of list
+    while(ptr != None):
 
-    prev_gr_end = None
-    curr = head
-    for i in range(groups):
-        prev = None
-        curr_gr_end = curr
-        for j in range(k):
-            nxt = curr.next
-            curr.next = prev
-            prev = curr
-            curr = nxt
-        if prev_gr_end:
-            prev_gr_end.next = prev
-        prev_gr_end = curr_gr_end
-        curr_gr_end.next = curr
+        tracker = ptr
+        #Checking if k number of nodes exist. If not, break out of the loop
+        for i in range(k):
 
-    return result
+            if tracker == None:
+                break
+       
+            tracker = tracker.next
 
-linkList = LinkedList()
-linkList.create_linked_list([3, 4, 5, 6, 2, 8, 7, 7])
-  
-linkList.head = reverse_k_groups(linkList.head, 3)
+        if tracker == None:
+            break
+            
+        #Reversing k nodes, where previous = head of the reversed list and current = head of the remaining nodes.
+        previous, current = reverse_linked_list(ptr.next, k)
 
-print(linkList.__str__())
+        last_node_of_reversed_group = ptr.next
+        last_node_of_reversed_group.next = current
+        ptr.next = previous
+        ptr = last_node_of_reversed_group
+
+    return dummy.next
