@@ -15,22 +15,29 @@ The array may have been rotated by some arbitrary number.
 # Space COmplexity: O(1)
 def binary_search_rotated(nums, target):
   
-  # Replace this placeholder return statement with your code
   left, right = 0, len(nums)-1
+  # Checking until left pointer crosses right
   while left<=right:
     mid = (left+right)//2
+    # Condition 1: If the mid value matches the target return mid
     if nums[mid]==target:
       return mid
-    elif nums[right]<nums[left]:
-      if nums[left]>target:
-        left += 1
+    # Condition 2: If the left value > mid value, we know the sequence is sorted on the right half
+    elif nums[left]>nums[mid]:
+      # Condition 2.1: Performing binary search on the sorted half
+      if target>nums[mid] and target<=nums[right]:
+        left = mid + 1
+      # Condition 2.2: If the sorted half doesnot satifies the criteria then checkeing in the unsorted half
       else:
-        right -= 1
-    elif nums[right]>=nums[left]:
-      if nums[mid]<target:
-        left += 1
+        right = mid - 1
+    # Condition 3: If the left value <left mid value, we know the sequence is sorted on the left half
+    else:
+      # Condition 3.1: Performing binary search on the sorted half
+      if target<nums[mid] and target>=nums[left]:
+        right = mid - 1
+      # Condition 3.2: If the sorted half doesnot satifies the criteria then checkeing in the unsorted half
       else:
-        right -= 1
+        left = mid + 1
 
   return -1
 
