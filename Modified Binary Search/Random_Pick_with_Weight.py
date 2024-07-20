@@ -13,6 +13,8 @@ import random
 
 class RandomPickWithWeight:
 
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     def __init__(self, weights):
         # Write your code here
         # The weights array, consisting of integers, is passed to the constructor
@@ -23,7 +25,9 @@ class RandomPickWithWeight:
         for weight in weights:
             running_sum += weight
             self.running_sum_list.append(running_sum)
-        
+
+    # Time Complexity: O(log(n))
+    # Space Complexity: O(1)    
     def pick_index(self):
         # Replace this placeholder return statement with your code
 
