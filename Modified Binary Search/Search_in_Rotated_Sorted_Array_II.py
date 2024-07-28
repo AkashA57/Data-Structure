@@ -14,7 +14,8 @@ Constraints
 arr is guaranteed to be rotated at some pivot index. 
 -10^4 ≤ t ≤ 10^4  
 """
-
+# Time Complexity: Worst case O(n), Average Case O(logn)
+# Space Complexity: O(1)
 def search(arr, t):
 
     # Initializing left and right pointer for modified binary search.
